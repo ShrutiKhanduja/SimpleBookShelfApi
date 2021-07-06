@@ -9,3 +9,4 @@ RUN go mod download
 COPY . .
 
 RUN go build -ldflags '-w -s' -a -o ./bin/app ./cmd/app
+EXPOSE 8080

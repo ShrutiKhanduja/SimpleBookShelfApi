@@ -13,9 +13,9 @@ type Conf struct {
 
 type serverConf struct {
 	Port         uint16        `env:"SERVER_PORT,default=8080"`
-	TimeoutRead  time.Duration `env:"SERVER_TIMEOUT_READ,required"`
-	TimeoutWrite time.Duration `env:"SERVER_TIMEOUT_WRITE,required"`
-	TimeoutIdle  time.Duration `env:"SERVER_TIMEOUT_IDLE,required"`
+	TimeoutRead  time.Duration `env:"SERVER_TIMEOUT_READ"`
+	TimeoutWrite time.Duration `env:"SERVER_TIMEOUT_WRITE"`
+	TimeoutIdle  time.Duration `env:"SERVER_TIMEOUT_IDLE"`
 }
 
 func AppConfig() *Conf {
