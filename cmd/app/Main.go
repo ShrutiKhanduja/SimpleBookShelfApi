@@ -7,16 +7,19 @@ import (
 
 	"CODE/config"
 	"CODE/server/router"
+	lr "CODE/util/logger"
 )
 
 func main() {
 	appConf := config.AppConfig()
 	appRouter := router.New()
+	logger := lr.New(appConf.Server.Debug)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", Greet)
 
 	address := fmt.Sprintf(":%d", appConf.Server.Port)
+	logger.Info().Msgf("Starting server %v", address)
 
 	log.Printf("Starting server %s\n", address)
 
