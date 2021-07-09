@@ -1,19 +1,20 @@
 package main
 
 import (
+	"CODE/config"
+	server "CODE/server/app"
+	"CODE/server/router"
+	lr "CODE/util/logger"
 	"fmt"
 	"log"
 	"net/http"
-
-	"CODE/config"
-	"CODE/server/router"
-	lr "CODE/util/logger"
 )
 
 func main() {
 	appConf := config.AppConfig()
-	appRouter := router.New()
 	logger := lr.New(appConf.Server.Debug)
+	application := server.New(logger)
+	appRouter := router.New(application)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", Greet)

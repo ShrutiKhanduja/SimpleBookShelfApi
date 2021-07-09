@@ -4,12 +4,14 @@ import (
 	"github.com/go-chi/chi"
 
 	server "CODE/server/app"
+	"CODE/server/handler"
 )
 
-func New() *chi.Mux {
-	r := chi.NewRouter()
+func New(a *server.App) *chi.Mux {
+	l := a.Logger()
 
-	r.MethodFunc("GET", "/", server.HandleIndex)
+	r := chi.NewRouter()
+	r.Method("GET", "/", handler.NewHandler(a.HandleIndex, l))
 
 	return r
 }
