@@ -8,5 +8,8 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -ldflags '-w -s' -a -o ./bin/app ./cmd/app
+RUN go build -ldflags '-w -s' -a -o ./bin/app ./cmd/app\
+ && go build -ldflags '-w -s' -a -o ./bin/migrate ./cmd/migrate
+COPY --from=build-env /CODE/bin/migrate /CODE/
+COPY --from=build-env /CODE/migrations /CODE/migrations
 EXPOSE 8080
